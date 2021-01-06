@@ -27,7 +27,6 @@ Vue.component('product', {
         return {
             altText: 'A pair of socks',
             brand: 'Vue Mastery',
-            cart: 0,
             details: ['80% cotton', '20% polyester', 'Gender-neutral'],
             link: 'http://vuejs.org',
             onSale: true,
@@ -45,23 +44,27 @@ Vue.component('product', {
                     variantId: 2235,
                     variantColor: 'blue',
                     variantImage: './assets/vmSocks-blue-onWhite.jpg',
-                    variantQuantity: 0
+                    variantQuantity: 1
                 }
             ]
         };
     },
     methods: {
         addToCart() {
-            this.cart += 1;
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
         removeFromCart() {
-            this.cart -= 1;
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
         },
         updateProduct(index) {
             this.selectedVariant = index;
         }
     },
     props: {
+        cart: {
+            type: Array,
+            required: true
+        },
         premium: {
             type: Boolean,
             required: true
@@ -89,10 +92,7 @@ Vue.component('product', {
                 </div>
                 <a :href="link">Link</a>
                 <button @click="addToCart" :class="{ disabledButton: !inStock }" :disabled="!inStock">Add to cart</button>
-                <button @click="removeFromCart" :class="{ disabledButton: !cart }" :disabled="!cart">Remove from cart</button>
-                <div class="cart">
-                    <p> Cart({{ cart }}) </p>
-                </div>
+                <button @click="removeFromCart" :class="{ disabledButton: !cart.includes(variants[selectedVariant].variantId) }" :disabled="!cart">Remove from cart</button>
             </div>
         </div>
     `
@@ -117,10 +117,16 @@ var app = new Vue({
 
     },
     data: {
+        cart: [],
         premium: true
     },
     el: '#app',
     methods: {
-
+        addToCart: function (id) {
+            this.cart.push(id);
+        },
+        removeFromCart: function (id) {
+            this.cart.splice(this.cart.indexOf(id), 1);
+        }
     }
 });
