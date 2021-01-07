@@ -19,7 +19,6 @@ app.component('review-form', {
                     recommend: this.recommend
                 };
                 emitter.emit('review-submitted', productReview);
-                console.log(productReview);
                 this.name = null;
                 this.review = null;
                 this.rating = null;
