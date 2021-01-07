@@ -172,31 +172,40 @@ Vue.component('product-review', {
                 </ul>
             </p>
             <p>
-                <label for="name">Name:</label>
-                <input type="text" id="name" v-model="name" placeholder="Name"></input>
+                <label>
+                    Name: <br>
+                    <input type="text" placeholder="Name" v-model="name"></input>
+                </label>
             </p>
             <p>
-                <label for="review">Review:</label>
-                <textarea name="" id="review" cols="30" rows="10" v-model="review"></textarea>
+                <label>
+                    Review: <br>
+                    <textarea v-model="review"></textarea>
+                </label>
             </p>
             <p>
-                <label for="rating">Rating:</label>
-                <select name="" id="rating" v-model.number="rating">
-                    <option>5</option>
-                    <option>4</option>
-                    <option>3</option>
-                    <option>2</option>
-                    <option>1</option>
-                </select>
-            </p>
-            <p> Would you recommend this product? <br>
-                <label>Yes:</label>
-                <input type="radio" v-model="recommend" value="Yes" checked />
-                <label>No:</label>
-                <input type="radio" v-model="recommend" value="No">
+                <label>
+                    Rating:
+                    <select v-model.number="rating">
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                    </select>
+                </label>
             </p>
             <p>
-                <input type="submit" value="submit">
+                Would you recommend this product? <br>
+                <label>
+                    Yes: <input type="radio" value="Yes" v-model="recommend"></input>
+                </label>
+                <label>
+                    No: <input type="radio" value="No" v-model="recommend"></input>
+                </label>
+            </p>                
+            <p>
+                <input type="submit" value="submit"></input>
             </p>
         </form>
     `
