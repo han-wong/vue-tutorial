@@ -5,18 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product App</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Import mitt-->
+    <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
 </head>
 
 <body>
     <div id="app">
+        <div class="nav-bar"></div>
         <div class="cart">
             <p> Cart({{ cart.length }}) </p>
         </div>
-        <product :cart="cart" :premium="premium" @add-to-cart="addToCart" @remove-from-cart="removeFromCart"> </product>
+        <product-display @add-to-cart="addToCart" @remove-from-cart="removeFromCart" :cart="cart" :premium="premium">
+        </product-display>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="main.js"></script>
+    <!-- Import App -->
+    <script src="./main.js"></script>
+    <!-- Import Components -->
+    <script src="./components/InfoTabs.js"></script>
+    <script src="./components/ProductDetails.js"></script>
+    <script src="./components/ProductDisplay.js"></script>
+    <script src="./components/ProductTabs.js"></script>
+    <script src="./components/ReviewForm.js"></script>
+    <script src="./components/ReviewList.js"></script>
+    <!-- Mount App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
 </body>
 
 </html>
